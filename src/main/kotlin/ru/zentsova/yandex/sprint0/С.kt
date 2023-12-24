@@ -1,4 +1,4 @@
-package ru.zentsova.yandex.print0
+package ru.zentsova.yandex.sprint0
 
 fun main() {
 	// 1 <= n <= 10_000
