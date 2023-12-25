@@ -24,7 +24,6 @@ private fun movingAverage(arr: List<Int>, n: Int, k: Int): List<Double> {
 	}
 }
 
-
 private fun readInt() = readStr().toInt()
 private fun readStr() = readln()
 private fun readStrings() = readStr().split(" ")
