@@ -17,6 +17,19 @@ private fun twoSum(arr: MutableList<Int>, k: Int): List<Int>? {
 	return null
 }
 
+// -3 0 4 1 9 -5 7    k = 6  -3, 9
+private fun twoSum2(arr: MutableList<Int>, k: Int): List<Int>? {
+	val set = mutableSetOf<Int>()
+	arr.forEach {
+		if (set.contains(k - it)) {
+			return listOf(it, k - it)
+		} else {
+			set.add(it)
+		}
+	}
+	return null
+}
+
 fun main() {
 	readInt()
 	val arr = readInts()
