@@ -22,11 +22,7 @@ fun main() {
 	val arr = readInts()
 	val k = readInt()
 	val result = twoSum(arr.toMutableList(), k)
-	if (result == null) {
-		println("None")
-	} else {
-		println(result.joinToString(" "))
-	}
+	println(result?.joinToString(" ") ?: "None" )
 }
 
 private fun readInt() = readStr().toInt()
