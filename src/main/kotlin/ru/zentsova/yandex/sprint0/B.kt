@@ -10,7 +10,7 @@ fun main() {
 
 private fun zip(a: List<Int>, b: List<Int>, size: Int): List<Int> {
 	val result = mutableListOf<Int>()
-	for (i in 0..< size) {
+	for (i in 0 until size) {
 		result.add(a[i])
 		result.add(b[i])
 	}
