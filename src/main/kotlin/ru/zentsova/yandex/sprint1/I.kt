@@ -28,7 +28,7 @@ private fun isDegreeOfFour2(n: Int): Boolean {
 	// 0001
 	// 0000
 	var num = n
-	while (((num and 1) == 0) && ((num shr 1) and 1) == 0) {
+	while (((num and 1) == 0) && (((num shr 1) and 1) == 0)) {
 		num = num shr 2
 	}
 	return num == 1
