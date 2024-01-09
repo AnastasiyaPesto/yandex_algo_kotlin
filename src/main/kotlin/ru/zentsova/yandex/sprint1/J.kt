@@ -1,55 +1,27 @@
 package ru.zentsova.yandex.sprint1
 
 fun main() {
-  val n = readInt()
-	val primeNumbers = primeNumbersByEratosthenes(n)
-	val simpleMultipliers = simpleMultipliers(n, primeNumbers)
+	val simpleMultipliers = simpleMultipliers(readInt())
 	println(simpleMultipliers.joinToString(" "))
 }
 
-fun simpleMultipliers(n: Int, primeNumbers: List<Int>): List<Int> {
+fun simpleMultipliers(n: Int): List<Int> {
 	return buildList {
-		var num = n
-		val iterator = primeNumbers.listIterator()
-		var curPrime = iterator.next()
-		while (iterator.hasNext()) {
-			if (num % curPrime == 0) {
-				num /= curPrime
-				add(curPrime)
-				if (primeNumbers.contains(num)) {
-					add(num)
-					return@buildList
-				}
+		var checkedNumber = n
+		var number = 2
+		while (number * number <= n) {
+			if (checkedNumber % number == 0) {
+				checkedNumber /= number
+				add(number)
 			} else {
-				curPrime = iterator.next()
+				number++
 			}
 		}
-		add(curPrime)
-	}
-}
-
-fun primeNumbersByEratosthenes(n: Int): List<Int> {
-	val numbers = BooleanArray(n + 1) { true }
-	numbers[0] = false
-	numbers[1] = false
-	for (num in 2..n) {
-		if (numbers[num]) {
-			for (j in (num * num)..n step num) {
-				numbers[j] = false
-			}
+		if (checkedNumber > 1) {
+			add(checkedNumber)
 		}
 	}
-
-	val res = mutableListOf<Int>()
-	for (i in numbers.indices) {
-		if (numbers[i]) {
-			res.add(i)
-		}
-	}
-
-	return res
 }
-
 
 private fun readStr() = readln()
 
