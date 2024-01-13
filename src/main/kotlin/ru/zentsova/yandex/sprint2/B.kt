@@ -1,6 +1,6 @@
 //package ru.zentsova.yandex.sprint2
 //
-//// https://contest.yandex.ru/contest/22779/problems/B/ - Список дел
+//// https://contest.yandex.ru/contest/22779/problems/B/ - B. Список дел
 //
 //// <template>
 //class Node<V>(
