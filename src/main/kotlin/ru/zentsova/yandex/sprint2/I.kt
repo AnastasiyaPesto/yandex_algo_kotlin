@@ -1,9 +1,14 @@
 package ru.zentsova.yandex.sprint2
 
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.lang.RuntimeException
+import java.util.*
 
 class QueueFullSizeException : RuntimeException()
+
 class MyQueueSized(private val maxSize: Int) {
+
 	private val queue = arrayOfNulls<Int>(maxSize)
 	private var head = 0
 	private var tail = 0
@@ -33,13 +38,15 @@ class MyQueueSized(private val maxSize: Int) {
 }
 
 fun main() {
-	val commandCount = readInt()
-	val queue = MyQueueSized(readInt())
+	val reader = BufferedReader(InputStreamReader(System.`in`))
+	val commandCount = reader.readLine().toInt()
+	val queue = MyQueueSized(reader.readLine().toInt())
 	for (i in 0 until commandCount) {
-		val commands = readStrings()
-		when (commands[0]) {
+		val token = StringTokenizer(reader.readLine())
+		val commandName = token.nextToken()
+		when (commandName) {
 			"push" -> try {
-				queue.push(commands[1].toInt())
+				queue.push(token.nextToken().toInt())
 			} catch (e: QueueFullSizeException) {
 				println("error")
 			}
@@ -49,9 +56,3 @@ fun main() {
 		}
 	}
 }
-
-private fun readStr() = readln()
-
-private fun readInt() = readStr().toInt()
-
-private fun readStrings() = readStr().split(" ")

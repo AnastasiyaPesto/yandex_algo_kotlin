@@ -1,6 +1,8 @@
 package ru.zentsova.yandex.sprint2
 
-import java.util.LinkedList
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.util.*
 
 class MyQueueList {
 
@@ -20,20 +22,16 @@ class MyQueueList {
 }
 
 fun main() {
-	val commandCount = readInt()
+	val reader = BufferedReader(InputStreamReader(System.`in`))
+	val commandCount = reader.readLine().toInt()
 	val queue = MyQueueList()
 	for (i in 0 until commandCount) {
-		val commands = readStrings()
-		when (commands[0]) {
-			"put" -> queue.put(commands[1].toInt())
+		val token = StringTokenizer(reader.readLine())
+		val commandName = token.nextToken()
+		when (commandName) {
+			"put" -> queue.put(token.nextToken().toInt())
 			"get" -> println(queue.get() ?: "error")
 			"size" -> println(queue.size())
 		}
 	}
 }
-
-private fun readStr() = readln()
-
-private fun readInt() = readStr().toInt()
-
-private fun readStrings() = readStr().split(" ")
