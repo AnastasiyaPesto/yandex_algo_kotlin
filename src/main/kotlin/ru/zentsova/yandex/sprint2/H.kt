@@ -30,7 +30,6 @@ class Stack(var cur: Node<Char>? = null) {
 val CLOSE_BRACKETS = setOf('}', ')', ']')
 val CLOSE_OPEN_BRACKET_PAIRS = mapOf('}' to '{', ')' to '(', ']' to '[')
 
-
 fun main() {
   val isCorrect = isCorrectBracketSeq(readln())
   if (isCorrect) println("True") else println("False")
