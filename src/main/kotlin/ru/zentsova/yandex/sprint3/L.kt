@@ -30,6 +30,30 @@ fun main() {
 	println(days.joinToString(" "))
 }
 
+fun binarySearch(arr: IntArray, x: Int): Int {
+	var left = 0
+	var right = arr.size - 1
+	var closestIdx = -1
+
+	while (left < right) {
+		var mid = left + (right - left) / 2
+		if (arr[mid] == x) {
+			val tmp = arr[mid]
+			do {
+				mid--
+			} while (tmp == arr[mid])
+			return mid + 1
+		} else if (x < arr[mid]) {
+			closestIdx = mid
+			right = mid - 1
+		} else {
+			closestIdx = mid
+			left = mid + 1
+		}
+	}
+	return -1
+}
+
 private fun BufferedReader.readInts() = this.readLine().split(" ").map { it.toInt() }
 
 private fun BufferedReader.readInt() = this.readLine().toInt()
