@@ -10,24 +10,39 @@ fun main() {
 	val bikePrice = reader.readInt()
 	val doubleBikePrice = 2 * bikePrice
 
-	val days = mutableListOf(-1, -1)
-	var i = 0
-	while (i < n) {
-		if (moneybox[i] >= bikePrice) {
-			days[0] = i + 1
+	val day = binarySearch2(moneybox.toIntArray(), bikePrice)
+//	println(days.joinToString(" "))
+	println(day)
+}
+
+fun binarySearch2(arr: IntArray, x: Int): Int {
+	var left = 0
+	var right = arr.size - 1
+	var res = -1
+
+	while (left < right) {
+		var mid = left + (right - left) / 2
+		if (arr[mid] == x) {
+			res = mid
+			break
+		} else if (right - left != 1) {
+			if (arr[mid] > x) {
+				right = mid
+			} else {
+				left = mid
+			}
+		} else {
+			res = if (arr[left] == x) left else right
 			break
 		}
-		i++
 	}
-	i++
-	while (i < n) {
-		if (moneybox[i] >= doubleBikePrice) {
-			days[1] = i + 1
-			break
-		}
-		i++
+
+	val num = arr[res]
+	while (arr[res] == num) {
+		//todo
 	}
-	println(days.joinToString(" "))
+
+	return res + 1
 }
 
 fun binarySearch(arr: IntArray, x: Int): Int {
