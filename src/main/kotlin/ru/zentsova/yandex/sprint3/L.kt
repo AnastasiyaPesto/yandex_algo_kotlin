@@ -5,17 +5,17 @@ import java.io.InputStreamReader
 
 fun main() {
 	val reader = BufferedReader(InputStreamReader(System.`in`))
-	val n = reader.readInt()
+	reader.readInt()
 	val moneybox = reader.readInts()
 	val bikePrice = reader.readInt()
 	val doubleBikePrice = 2 * bikePrice
 
-	val day = binarySearch2(moneybox.toIntArray(), bikePrice)
-//	println(days.joinToString(" "))
-	println(day)
+	val day1 = binarySearch(moneybox.toIntArray(), bikePrice)
+	val day2 = binarySearch(moneybox.toIntArray(), doubleBikePrice)
+	println("${if (day1 == -1) -1 else day1 + 1} ${if (day2 == -1) -1 else day2 + 1}")
 }
 
-fun binarySearch2(arr: IntArray, x: Int): Int {
+fun binarySearch(arr: IntArray, x: Int): Int {
 	var left = 0
 	var right = arr.size - 1
 	var res = -1
@@ -25,48 +25,30 @@ fun binarySearch2(arr: IntArray, x: Int): Int {
 		if (arr[mid] == x) {
 			res = mid
 			break
-		} else if (right - left != 1) {
-			if (arr[mid] > x) {
-				right = mid
-			} else {
-				left = mid
-			}
-		} else {
+		} else if (right - left == 1) {
 			res = if (arr[left] == x) left else right
 			break
-		}
-	}
-
-	val num = arr[res]
-	while (arr[res] == num) {
-		//todo
-	}
-
-	return res + 1
-}
-
-fun binarySearch(arr: IntArray, x: Int): Int {
-	var left = 0
-	var right = arr.size - 1
-	var closestIdx = -1
-
-	while (left < right) {
-		var mid = left + (right - left) / 2
-		if (arr[mid] == x) {
-			val tmp = arr[mid]
-			do {
-				mid--
-			} while (tmp == arr[mid])
-			return mid + 1
-		} else if (x < arr[mid]) {
-			closestIdx = mid
-			right = mid - 1
+		} else if (arr[mid] > x) {
+			right = mid
 		} else {
-			closestIdx = mid
-			left = mid + 1
+			left = mid
 		}
 	}
-	return -1
+
+	res = if (arr[left] == x) left else right
+
+	if (arr[res] < x)
+		return -1
+
+	if (res > 0) {
+		val num = arr[res]
+
+		while (arr[res - 1] == num) {
+			 res--
+		}
+	}
+
+	return res
 }
 
 private fun BufferedReader.readInts() = this.readLine().split(" ").map { it.toInt() }
