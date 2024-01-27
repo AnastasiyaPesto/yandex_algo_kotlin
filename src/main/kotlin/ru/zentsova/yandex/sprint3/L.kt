@@ -4,15 +4,64 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 fun main() {
-	val reader = BufferedReader(InputStreamReader(System.`in`))
-	reader.readInt()
-	val moneybox = reader.readInts()
-	val bikePrice = reader.readInt()
-	val doubleBikePrice = 2 * bikePrice
+//	val reader = BufferedReader(InputStreamReader(System.`in`))
+//	reader.readInt()
+//	val moneybox = reader.readInts()
+//	val bikePrice = reader.readInt()
+//	val doubleBikePrice = 2 * bikePrice
 
-	val day1 = binarySearch(moneybox, bikePrice)
-	val day2 = binarySearch(moneybox, doubleBikePrice)
-	println("${if (day1 == -1) -1 else day1 + 1} ${if (day2 == -1) -1 else day2 + 1}")
+	//	val day2 = binarySearch2(moneybox, doubleBikePrice)
+//	println("${if (day1 == -1) -1 else day1 + 1} ${if (day2 == -1) -1 else day2 + 1}")
+
+
+//	var moneybox = listOf(1, 2, 4, 4, 6, 8)
+
+//	var day1 = binarySearch2(moneybox, 3)
+//	println("Should 2 -> " + day1)
+//
+//	day1 = binarySearch2(moneybox, 4)
+//	println("Should 2 -> " + day1)
+//
+//	day1 = binarySearch2(moneybox, 5)
+//	println("Should 4 -> " + day1)
+//
+//	day1 = binarySearch2(moneybox, 9)
+//	println("Should -1 -> " + day1)
+//
+//	day1 = binarySearch2(moneybox, 2)
+//	println("Should 1 -> " + day1)
+//
+//	day1 = binarySearch2(moneybox, 1)
+//	println("Should 0 -> " + day1)
+//
+	var moneybox = listOf(3, 3, 3, 3, 3, 7, 9)
+//
+//	day1 = binarySearch2(moneybox, 2)
+//	println("Should -1 -> " + day1)
+
+	var day1 = binarySearch2(moneybox, 3)
+	println("Should 0 -> " + day1)
+}
+
+fun binarySearch2(arr: List<Int>, x: Int): Int {
+	if (arr.last() < x) {
+		return -1
+	}
+
+	var left = 0
+	var right = arr.size - 1
+
+	while (right - left > 1) {
+		val mid = left + (right - left) / 2
+		if (arr[mid] >= x) {
+			right = mid
+		} else {
+			left = mid
+		}
+	}
+
+	return right
+//	return if (arr[left] != x) right else left
 }
 
 fun binarySearch(arr: List<Int>, x: Int): Int {
