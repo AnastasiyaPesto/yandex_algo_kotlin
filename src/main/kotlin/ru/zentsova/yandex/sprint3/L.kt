@@ -25,6 +25,7 @@ fun binarySearch(arr: List<Int>, x: Int): Int {
 	var right = arr.size - 1
 
 	while (left < right) {
+		// if (left == mid)
 		if (right - left == 1) {
 			right = if (arr[left] >= x) left else right
 			break
