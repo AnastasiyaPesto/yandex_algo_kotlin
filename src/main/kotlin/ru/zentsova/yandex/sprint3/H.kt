@@ -3,7 +3,7 @@ package ru.zentsova.yandex.sprint3
 import kotlin.math.pow
 
 fun main() {
-	val n = readInt()
+	readInt()
 	val array = readInts()
 	println(makeBiggestNumber(array))
 }
