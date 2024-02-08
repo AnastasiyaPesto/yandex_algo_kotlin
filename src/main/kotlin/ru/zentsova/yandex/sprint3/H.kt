@@ -1,36 +1,32 @@
 package ru.zentsova.yandex.sprint3
 
-import kotlin.math.pow
-
 fun main() {
 	readInt()
 	val array = readInts()
 	println(makeBiggestNumber(array))
 }
 
-private fun makeBiggestNumber(array: List<Int>): String {
-	val counter = MutableList<MutableList<Int>>(10) { mutableListOf() }
-	for (num in array) {
-		val idx = firstDigit(num)
-		counter[idx].add(num)
-	}
-	val result = mutableListOf<Int>()
-	for (i in counter.size - 1 downTo 0) {
-		counter[i].sortDescending()
-		result.addAll(counter[i])
-	}
-	return result.joinToString("")
+private fun makeBiggestNumber(array: IntArray): String {
+	insertionSortByComparator(array, ::comparator)
+	return array.joinToString("")
 }
 
-private fun firstDigit(number: Int): Int {
-	var n = number
-	var size = 0
-	while (n > 0) {
-		n /= 10
-		size++
+private fun insertionSortByComparator(array: IntArray, needMoveLeft: (Int, Int) -> Boolean) {
+	for (i in 1 until array.size) {
+		val itemToInsert = array[i]
+		var j = i
+		while (j > 0 && needMoveLeft(array[j - 1], itemToInsert)) {
+			array[j] = array[j - 1]
+			j--
+		}
+		array[j] = itemToInsert
 	}
-	val scale = 10.0.pow(size - 1).toInt()
-	return number / scale
+}
+
+private fun comparator(num1: Int, num2: Int): Boolean {
+	val num12 = num1.toString() + num2.toString()
+	val num21 = num2.toString() + num1.toString()
+	return num12 < num21
 }
 
 private fun readStr() = readln()
@@ -39,4 +35,4 @@ private fun readInt() = readln().toInt()
 
 private fun readStrings() = readStr().split(" ")
 
-private fun readInts() = readStrings().map { it.toInt() }
+private fun readInts() = readStrings().map { it.toInt() }.toIntArray()
