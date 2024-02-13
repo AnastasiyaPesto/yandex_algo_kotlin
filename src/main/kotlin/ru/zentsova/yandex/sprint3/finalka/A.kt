@@ -6,21 +6,24 @@ object Solution {
   fun brokenSearch(arr: IntArray, k: Int): Int {
     var left = 0
     var right = arr.size - 1
-    var oldLeftValue = arr[left]
-    var oldRightValue = arr[right]
 
-    while (arr[left] > k || arr[right] < k) {
-      while (arr[left] > k) {
-        left += (right - left) / 2
-      }
-
-      while (arr[right] < k) {
-        right = left + (right - left) / 2
-        val newRightValue = arr[right]
-        if (newRightValue > oldRightValue) {
-          oldLeftValue = newRightValue
-          left = right
-          break
+    while (left <= right) {
+      val mid = left + (right - left) / 2
+      when {
+        arr[mid] == k -> return mid
+        arr[left] <= arr[mid] -> {
+          if (arr[left] <= k && k < arr[mid]) {
+            right = mid - 1
+          } else {
+            left = mid + 1
+          }
+        }
+        else -> {
+          if (arr[mid] < k && k <= arr[right]) {
+            left = mid + 1
+          } else {
+            right = mid - 1
+          }
         }
       }
     }
@@ -46,8 +49,11 @@ fun main() {
 //  val k = 18
 //  val array = intArrayOf(18, 20, 38, 45, 57, 99, 1005, 3, 4, 7, 9, 13)
 
-  val k = 100
-  val array = intArrayOf(18, 20, 38, 45, 57, 99, 1005, 3, 4, 7, 9, 13)
+//  val k = 1005
+//  val array = intArrayOf(18, 20, 38, 45, 57, 98, 1005, 3, 4, 7, 9)
 
-  brokenSearch(array, k)
+  val k = 61
+  val array = intArrayOf(18, 20, 38, 45, 57, 98, 1005, 3, 4, 7, 9)
+
+  println(brokenSearch(array, k))
 }
